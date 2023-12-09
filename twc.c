@@ -68,7 +68,7 @@ static void fparse(const char *s) {
 		while ((sep = strchr(line, '_')))
 			*sep = ' ';
 
-		printf("%-24s%s\n", line, timestr);
+		printf("%-32s%s\n", line, timestr);
 	}
 
 	free(line);
