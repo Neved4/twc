@@ -46,16 +46,19 @@ static void fparse(const char *s, const char *fpath) {
 		size_t sizet = strlen(home) + strlen(conf) + strlen(file) + 1;
 		char *path = malloc(sizet);
 		snprintf(path, sizet, "%s%s%s", home, conf, file);
-
 		fpath = path;
 	}
 
-	fp = fopen(fpath, "r");
-	if (!fp)
-		errmsg(strcat("configuration file not found in ", fpath));
-
 	time_t t;
 	time(&t);
+
+	fp = fopen(fpath, "r");
+	if (!fp) {
+		setenv("TZ", "UTC", 1);
+		strftime(timestr, sizeof(timestr), s, gmtime(&t));
+		printf("%-32s%s\n", "UTC-0", timestr);
+		return;
+	}
 
 	while (getline(&line, &len, fp) != -1) {
 		if (*line == '#' || *line == '\n')
