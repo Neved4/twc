@@ -54,11 +54,28 @@ static void fparse(const char *s, const char *fpath) {
 
 	fp = fopen(fpath, "r");
 	if (!fp) {
-		setenv("TZ", "UTC", 1);
+		line = "UTC";
+		setenv("TZ", line, 1);
 		strftime(timestr, sizeof(timestr), s, gmtime(&t));
-		printf("%-32s%s\n", "UTC-0", timestr);
+		int width = strlen(line) + 2;
+		printf("%-*s%s\n", width, line, timestr);
 		return;
 	}
+
+	size_t max_width = 0;
+
+	while (getline(&line, &len, fp) != -1) {
+		if (*line == '#' || *line == '\n')
+			continue;
+
+		size_t width = strlen(line);
+		if (width > max_width) {
+			max_width = width;
+		}
+	}
+
+	max_width = max_width + 1;
+	rewind(fp);
 
 	while (getline(&line, &len, fp) != -1) {
 		if (*line == '#' || *line == '\n')
@@ -74,7 +91,7 @@ static void fparse(const char *s, const char *fpath) {
 		while ((sep = strchr(line, '_')))
 			*sep = ' ';
 
-		printf("%-32s%s\n", line, timestr);
+		printf("%-*s%s\n", (int)max_width, line, timestr);
 	}
 
 	free(line);
