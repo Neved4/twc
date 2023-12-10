@@ -1,17 +1,29 @@
-[![C](https://img.shields.io/badge/ISO_C99-A8B9CC?logo=c&logoColor=fff&style=for-the-badge)][C99]
-[![POSIX.1](https://img.shields.io/badge/POSIX.1&#8209;2017-6A737D?labelColor=6A737D&style=for-the-badge)][POSIX.1-2017]
+[![C](https://img.shields.io/badge/ISO_C99-A8B9CC?logo=c&logoColor=fff)][C99]
+![IEEE](https://img.shields.io/badge/POSIX.1&#8209;2017-00629B?logo=ieee&logoColor=fff)
+![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)
 
 # `twc` - simple world clock
 
 `twc` is a fast cli world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
+```console
+$ twc -hf test.txt
+America/New York     2023-12-10  16:39:43  -0500
+America/Los Angeles  2023-12-10  13:39:43  -0800
+UTC                  2023-12-10  21:39:43  +0000
+Europe/London        2023-12-10  21:39:43  +0000
+Europe/Paris         2023-12-10  22:39:43  +0100
+Asia/Tokyo           2023-12-11  06:39:43  +0900
+Australia/Sydney     2023-12-11  08:39:43  +1100
+```
+
 ### Highlights
 
 - 🚀 _**Fast**_ - `twc` executes in only ~ `8 ms` for one entry, (`177 ms`
   for ~`600` entries).
-- 🔒 _**Robust**_ - tested to work with all [`tz database`] entries,
-  version `2023c`.
+- 🔒 _**Robust**_ - tested to work with all [tz database] entries,
+  `version 2023c`.
 - 📦 **Self-contained** - zero dependencies, lighweight, ISO C99,
   (`2676 bytes`, `140 lines`).
 
