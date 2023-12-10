@@ -8,7 +8,7 @@ Fast CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
 ```console
-$ twc -h -f test.txt
+$ twc -h -f tz-small.conf
 America/New York     2023-12-10  16:39:43  -0500
 America/Los Angeles  2023-12-10  13:39:43  -0800
 UTC                  2023-12-10  21:39:43  +0000
@@ -61,8 +61,11 @@ Options:
     -t  Manually specify a tz database entry.
 
 Files:
-   ≈  /.config/twc/tz.conf
+    ~/.config/twc/tz.conf
         Stores valid tz database identifiers to be displayed by twc.
+
+Examples:
+
 
 See also:
     time(3), strftime(3)
