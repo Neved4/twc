@@ -1,12 +1,12 @@
-#define _POSIX_C_SOURCE 200809L
-#define STR_LENGTH 32
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <libgen.h>
 #include <time.h>
 #include <unistd.h>
+
+#define _POSIX_C_SOURCE 200809L
+#define STR_LENGTH 32
 
 enum {
 	TIMEFMT_ISO,
@@ -20,7 +20,8 @@ const char *time_fmts[NTIMEFMT] = {
 };
 
 static void usage(const char *s) {
-	fprintf(stderr, "usage: %s [-h] [-s SPEC] [-f FILE]\n", s);
+	fprintf(stderr,
+		"usage: %s [-h] [-s FORMAT] [-f FILE | -t TIMEZONE]\n", s);
 	exit(EXIT_FAILURE);
 }
 
@@ -29,13 +30,13 @@ static void errmsg(const char *msg) {
 	exit(EXIT_FAILURE);
 }
 
-static void fparse(const char *s, const char *fpath) {
+static void fparse(const char *s, const char *fpath, const char *fmt) {
 	char timestr[STR_LENGTH];
 	char *line = NULL, *path = NULL, *sep = NULL;
 	size_t len = 0;
 	FILE *fp;
 
-	if (!fpath) {
+	if (!fpath && !fmt) {
 		char *home = getenv("XDG_CONFIG_HOME");
 		home = (!home || !*home) ? getenv("HOME") : home;
 		if (!home || !*home)
@@ -44,7 +45,7 @@ static void fparse(const char *s, const char *fpath) {
 		char *conf = home == getenv("HOME") ? "/.config" : "";
 		char *file = "/twc/tz.conf";
 		size_t sizet = strlen(home) + strlen(conf) + strlen(file) + 1;
-		char *path = malloc(sizet);
+		path = malloc(sizet);
 		snprintf(path, sizet, "%s%s%s", home, conf, file);
 		fpath = path;
 	}
@@ -52,13 +53,21 @@ static void fparse(const char *s, const char *fpath) {
 	time_t t;
 	time(&t);
 
+	if (fmt) {
+		setenv("TZ", fmt, 1);
+		strftime(timestr, sizeof(timestr), s, localtime(&t));
+		printf("%s\n", timestr);
+		free(path);
+		return;
+	}
+
 	fp = fopen(fpath, "r");
 	if (!fp) {
 		line = "UTC";
 		setenv("TZ", line, 1);
 		strftime(timestr, sizeof(timestr), s, gmtime(&t));
 		int width = strlen(line) + 2;
-		printf("%-*s%s\n", width, line, timestr);
+		printf("%-*s\n", width, timestr);
 		return;
 	}
 
@@ -102,11 +111,11 @@ static void fparse(const char *s, const char *fpath) {
 int main(int argc, char **argv) {
 	int opt;
 	const char *progname = basename(argv[0]),
-		*timefmt = NULL, *fpath = NULL, *spec = NULL;
+		*timefmt = NULL, *fpath = NULL, *fmt = NULL;
 
 	timefmt = time_fmts[TIMEFMT_ISO];
 
-	while ((opt = getopt(argc, argv, "hf:s:")) != -1) {
+	while ((opt = getopt(argc, argv, "hf:s:t:")) != -1) {
 		switch (opt) {
 			case 'h':
 				timefmt = time_fmts[TIMEFMT_HUMAN];
@@ -117,13 +126,16 @@ int main(int argc, char **argv) {
 			case 's':
 				timefmt = optarg;
 				break;
+			case 't':
+				fmt = optarg;
+				break;
 			default:
 				usage(progname);
 				return 1;
 		}
 	}
 
-	fparse(timefmt, fpath);
+	fparse(timefmt, fpath, fmt);
 
 	return 0;
 }
