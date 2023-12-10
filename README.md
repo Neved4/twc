@@ -1,6 +1,6 @@
 [![C](https://img.shields.io/badge/ISO_C99-A8B9CC?logo=c&logoColor=fff)][C99]
 ![IEEE](https://img.shields.io/badge/POSIX.1&#8209;2017-00629B?logo=ieee&logoColor=fff)
-![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)
+[![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc/actions/workflows/codeql.yml)
 
 # `twc` - simple world clock
 
