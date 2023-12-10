@@ -20,8 +20,7 @@ const char *time_fmts[NTIMEFMT] = {
 };
 
 static void usage(const char *s) {
-	fprintf(stderr,
-		"usage: %s [-h] [-s FORMAT] [-f FILE | -t TIMEZONE]\n", s);
+	fprintf(stderr, "usage: %s [-h] [-s FORMAT] [-f FILE | -t TIMEZONE]\n", s);
 	exit(EXIT_FAILURE);
 }
 
@@ -83,7 +82,7 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 		}
 	}
 
-	max_width = max_width + 1;
+	max_width++;
 	rewind(fp);
 
 	while (getline(&line, &len, fp) != -1) {
@@ -117,21 +116,21 @@ int main(int argc, char **argv) {
 
 	while ((opt = getopt(argc, argv, "hf:s:t:")) != -1) {
 		switch (opt) {
-			case 'h':
-				timefmt = time_fmts[TIMEFMT_HUMAN];
-				break;
-			case 'f':
-				fpath = optarg;
-				break;
-			case 's':
-				timefmt = optarg;
-				break;
-			case 't':
-				fmt = optarg;
-				break;
-			default:
-				usage(progname);
-				return 1;
+		case 'h':
+			timefmt = time_fmts[TIMEFMT_HUMAN];
+			break;
+		case 'f':
+			fpath = optarg;
+			break;
+		case 's':
+			timefmt = optarg;
+			break;
+		case 't':
+			fmt = optarg;
+			break;
+		default:
+			usage(progname);
+			return 1;
 		}
 	}
 
