@@ -20,7 +20,7 @@ const char *time_fmts[NTIMEFMT] = {
 };
 
 static void usage(const char *s) {
-	fprintf(stderr, "usage: %s [-h] [-f FILE]\n", s);
+	fprintf(stderr, "usage: %s [-h] [-s SPEC] [-f FILE]\n", s);
 	exit(EXIT_FAILURE);
 }
 
@@ -101,17 +101,21 @@ static void fparse(const char *s, const char *fpath) {
 
 int main(int argc, char **argv) {
 	int opt;
-	const char *progname = basename(argv[0]);
-	const char *timefmt = time_fmts[TIMEFMT_ISO];
-	const char *fpath = NULL;
+	const char *progname = basename(argv[0]),
+		*timefmt = NULL, *fpath = NULL, *spec = NULL;
 
-	while ((opt = getopt(argc, argv, "hf:")) != -1) {
+	timefmt = time_fmts[TIMEFMT_ISO];
+
+	while ((opt = getopt(argc, argv, "hf:s:")) != -1) {
 		switch (opt) {
 			case 'h':
 				timefmt = time_fmts[TIMEFMT_HUMAN];
 				break;
 			case 'f':
 				fpath = optarg;
+				break;
+			case 's':
+				timefmt = optarg;
 				break;
 			default:
 				usage(progname);
