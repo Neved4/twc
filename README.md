@@ -4,11 +4,11 @@
 
 # `twc` - simple world clock
 
-`twc` is a fast cli world clock that displays time zone information using
+Fast CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
 ```console
-$ twc -hf test.txt
+$ twc -h -f test.txt
 America/New York     2023-12-10  16:39:43  -0500
 America/Los Angeles  2023-12-10  13:39:43  -0800
 UTC                  2023-12-10  21:39:43  +0000
@@ -20,8 +20,8 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 ### Highlights
 
-- 🚀 _**Fast**_ - `twc` executes in only ~ `8 ms` for one entry, (`177 ms`
-  for ~`600` entries).
+- 🚀 _**Fast**_ - `twc` executes in only ≈ `8 ms` for one entry, and ≈ `177 ms`
+  for ≈ `600` entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
 - 📦 **Self-contained** - zero dependencies, lighweight, ISO C99,
@@ -61,10 +61,10 @@ Options:
     -t  Manually specify a tz database entry.
 
 Files:
-    ~/.config/twc/tz.conf
+   ≈  /.config/twc/tz.conf
         Stores valid tz database identifiers to be displayed by twc.
 
-See Also:
+See also:
     time(3), strftime(3)
 ```
 
@@ -77,8 +77,7 @@ compiler that supports [C99] or later.
 ## Standards
 
 `twc` is compatible with [ISO 9945:2009][POSIX.1-2017], also known as
-[POSIX.1-2017] as well as [ISO/IEC 9899][C23] known as [C23], and with
-[C99].[^1] [^2]
+[POSIX.1-2017] as well as [ISO/IEC 9899][C23] known as [C23].[^1] [^2]
 
 ## Acknowledgments
 
