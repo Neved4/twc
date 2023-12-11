@@ -4,7 +4,7 @@
 
 # `twc` - simple world clock
 
-Fast CLI world clock that displays time zone information using
+Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
 ```console
@@ -20,8 +20,8 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 ### Highlights
 
-- 🚀 _**Fast**_ - `twc` executes in only ≈ `8 ms` for one entry, and ≈ `177 ms`
-  for ≈ `600` entries.
+- 🚀 _**Fast**_ - 6X times faster than `date`[^1]. twc executes in only ≈
+  `8 ms` for one entry, and ≈ `177 ms` for ≈ `600` entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
 - 📦 **Self-contained** - zero dependencies, ISO C99, lighweight (`2676
@@ -114,10 +114,11 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-[^1]: _IEEE Std 1003.1-2017: Standard for Information Technology
+[^1]: _cfr._ `date` command that takes ≈ `931 ms` for ≈ `600` entries.
+[^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
     — Portable Operating System Interface (POSIX®)_,
     ISO/IEC/IEEE 9945:2009/COR 2:2017.
     URL: https://pubs.opengroup.org/onlinepubs/9699919799/
-[^2]: _ISO/IEC 9899:2023: Standard for Information Technology
+[^3]: _ISO/IEC 9899:2023: Standard for Information Technology
     — Programming languages — C_, ISO/IEC 9899:2023.
     URL: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf
