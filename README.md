@@ -20,8 +20,8 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 ### Highlights
 
-- 🚀 _**Fast**_ - 6X times faster than `date`[^1]. twc executes in only ≈
-  `8 ms` for one entry, and ≈ `177 ms` for ≈ `600` entries.
+- 🚀 _**Fast**_ - 6X times faster than `date`[^1]. Only ≈ `8 ms` for one
+  entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
 - 📦 **Self-contained** - zero dependencies, ISO C99, lighweight (`2676
@@ -87,7 +87,7 @@ compiler that supports [C99] or later.
 ## Standards
 
 `twc` is compatible with [ISO 9945:2009][POSIX.1-2017], also known as
-[POSIX.1-2017] as well as [ISO/IEC 9899][C23] known as [C23].[^1] [^2]
+[POSIX.1-2017] as well as [ISO/IEC 9899][C23] known as [C23].[^2] [^3]
 
 ## Acknowledgments
 
@@ -116,9 +116,8 @@ See the [LICENSE](LICENSE) file for details.
 
 [^1]: _cfr._ `date` command that takes ≈ `931 ms` for ≈ `600` entries.
 [^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
-    — Portable Operating System Interface (POSIX®)_,
-    ISO/IEC/IEEE 9945:2009/COR 2:2017.
-    URL: https://pubs.opengroup.org/onlinepubs/9699919799/
+    — Portable Operating System Interface (POSIX®)_, \
+    ISO/IEC/IEEE 9945:2009/COR 2:2017. URL: https://pubs.opengroup.org/onlinepubs/9699919799/
 [^3]: _ISO/IEC 9899:2023: Standard for Information Technology
-    — Programming languages — C_, ISO/IEC 9899:2023.
+    — Programming languages — C_, ISO/IEC 9899:2023. \
     URL: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf
