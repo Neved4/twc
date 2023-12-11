@@ -24,8 +24,8 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
   for ≈ `600` entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
-- 📦 **Self-contained** - zero dependencies, lighweight, ISO C99,
-  (`2676 bytes`, `140 lines`).
+- 📦 **Self-contained** - zero dependencies, ISO C99, lighweight (`2676
+  bytes`, `140 lines`).
 
 ## Getting Started
 
@@ -65,10 +65,17 @@ Files:
         Stores valid tz database identifiers to be displayed by twc.
 
 Examples:
+    $ twc -h -s %Y-%m-%d -t Japan/Tokyo
+        2023-12-11
 
+    $ TZ=America/Los_Angeles twz
+        2023-12-11T04:25:37-0800
+
+Environment:
+    TZ  Timezone to use when displaying dates. See environ(7).
 
 See also:
-    time(3), strftime(3)
+    time(3), strftime(3), environ(7)
 ```
 
 ## Compatibility

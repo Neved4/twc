@@ -114,6 +114,11 @@ int main(int argc, char **argv) {
 
 	timefmt = time_fmts[TIMEFMT_ISO];
 
+	const char *tz_env = getenv("TZ");
+    if (tz_env) {
+        fmt = tz_env;
+    }
+
 	while ((opt = getopt(argc, argv, "hf:s:t:")) != -1) {
 		switch (opt) {
 		case 'h':
