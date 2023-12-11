@@ -2,7 +2,7 @@
 ![IEEE](https://img.shields.io/badge/POSIX.1&#8209;2017-00629B?logo=ieee&logoColor=fff)
 [![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc/actions/workflows/codeql.yml)
 
-# `twc` - simple world clock
+# `twc` - simple world clock in C 🛠️
 
 Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
@@ -20,7 +20,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 ### Highlights
 
-- 🚀 _**Fast**_ - 6X times faster than `date`[^1]. Only ≈ `8 ms` for one
+- 🚀 _**Fast**_ - 5X times faster than `date`[^1]. Only ≈ `8 ms` for one
   entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
@@ -65,11 +65,11 @@ Files:
         Stores valid tz database identifiers to be displayed by twc.
 
 Examples:
-    $ twc -h -s %Y-%m-%d -t Japan/Tokyo
-        2023-12-11
+    $ twc -h -s %Y-%m-%d -t Asia/Tokyo
+        2006-01-02
 
-    $ TZ=America/Los_Angeles twz
-        2023-12-11T04:25:37-0800
+    $ TZ=America/Los_Angeles twc
+        2006-01-02T15:04:05-0800
 
 Environment:
     TZ  Timezone to use when displaying dates. See environ(7).
@@ -92,9 +92,9 @@ compiler that supports [C99] or later.
 ## Acknowledgments
 
 Special thanks to everybody who helped me with pointers and _measuring
-optimal, safe memory allocation_ at every step of the program,
-[@K4rakara](https://github.com/K4rakara/) for her code review, and
-[@finnoleary](https://github.com/finnoleary), for getting me started.
+optimal memory allocation_, [@K4rakara](https://github.com/K4rakara/) for
+her code review, and [@finnoleary](https://github.com/finnoleary), for
+getting me started.
 
 ## License
                  
@@ -102,6 +102,7 @@ optimal, safe memory allocation_ at every step of the program,
 
 See the [LICENSE](LICENSE) file for details.
 
+[`hyperfine`]: https://github.com/sharkdp/hyperfine
 [`arm64`]: https://en.wikipedia.org/wiki/AArch64
 [`clang`]: https://clang.llvm.org/
 [`gcc`]: https://gcc.gnu.org/
@@ -114,7 +115,8 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-[^1]: _cfr._ `date` command that takes ≈ `931 ms` for ≈ `600` entries.
+[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ `600`
+    entries. Measured with [`hyperfine`].
 [^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
     — Portable Operating System Interface (POSIX®)_, \
     ISO/IEC/IEEE 9945:2009/COR 2:2017. URL: https://pubs.opengroup.org/onlinepubs/9699919799/
