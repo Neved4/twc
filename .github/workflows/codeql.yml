@@ -5,6 +5,8 @@ on:
     paths-ignore:
       - '**/LICENSE'
       - '**/*.md'
+      - '**/*.editorconfig'
+      - '**/*.gitattributes'
       - '**/*.yml'
       - '**/*.conf'
   pull_request:
