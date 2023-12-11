@@ -20,7 +20,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 ### Highlights
 
-- 🚀 _**Fast**_ - 6X times faster than `date`[^1]. twc executes in only ≈
+- 🚀 _**Fast**_ - 6X times faster than `date`[^1]. `twc` executes in only ≈
   `8 ms` for one entry, and ≈ `177 ms` for ≈ `600` entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
