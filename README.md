@@ -8,7 +8,7 @@ Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
 ```console
-$ twc -h -f tz-small.conf
+$ twc -h -f tools/samples/tz-small.conf
 America/New York     2023-12-10  16:39:43  -0500
 America/Los Angeles  2023-12-10  13:39:43  -0800
 UTC                  2023-12-10  21:39:43  +0000
