@@ -86,8 +86,8 @@ compiler that supports [C99] or later.
 
 ## Standards
 
-`twc` is compatible with [ISO 9945:2009][POSIX.1-2017], also known as
-[POSIX.1-2017] as well as [ISO/IEC 9899][C23] known as [C23].[^2] [^3]
+`twc` is compatible with [ISO 9945:2009][POSIX.1-2017] / [POSIX.1-2017][][^2] as
+well as [ISO/IEC 9899][C23] / [C23].[^3] and should produce [ISO 8601][][^4] output.
 
 ## Acknowledgments
 
@@ -108,10 +108,11 @@ See the [LICENSE](LICENSE) file for details.
 [`gcc`]: https://gcc.gnu.org/
 [`x86_64`]: https://en.wikipedia.org/wiki/X86-64
 [`zig`]: https://ziglang.org/
+[MIT License]: https://opensource.org/license/mit/
 [C23]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
 [C99]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
-[MIT License]: https://opensource.org/license/mit/
 [POSIX.1-2017]: https://pubs.opengroup.org/onlinepubs/9699919799/
+[ISO 8601]: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
@@ -123,3 +124,7 @@ See the [LICENSE](LICENSE) file for details.
 [^3]: _ISO/IEC 9899:2023: Standard for Information Technology
     — Programming languages — C_, ISO/IEC 9899:2023. \
     URL: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf
+[^4]: _ISO 8601-1:2019: Standard for Information Technology —
+    Date and time \
+    — Representations for information interchange_, ISO 8601-1:2019. \
+    URL: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
