@@ -81,7 +81,7 @@ See also:
 ## Compatibility
 
 Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on [`x86_64`] and
-[`arm64`], and compiles with [`zig`], [`clang`], [`gcc`] and any other
+[`arm64`], and compiles with [`zig`], [`clang`], [`gcc`], [`tcc`] and any other
 compiler that supports [C99] or later.
 
 ## Standards
@@ -104,9 +104,10 @@ See the [LICENSE](LICENSE) file for details.
 
 [`hyperfine`]: https://github.com/sharkdp/hyperfine
 [`arm64`]: https://en.wikipedia.org/wiki/AArch64
+[`x86_64`]: https://en.wikipedia.org/wiki/X86-64
 [`clang`]: https://clang.llvm.org/
 [`gcc`]: https://gcc.gnu.org/
-[`x86_64`]: https://en.wikipedia.org/wiki/X86-64
+[`tcc`]: https://bellard.org/tcc/
 [`zig`]: https://ziglang.org/
 [MIT License]: https://opensource.org/license/mit/
 [C23]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
