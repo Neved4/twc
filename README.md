@@ -20,7 +20,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 ### Highlights
 
-- 🚀 _**Fast**_ - 5X times faster than `date`[^1]. Only ≈ `8 ms` for one
+- 🚀 _**Fast**_ - 5X times faster than `date`.[^1] Only ≈ `8 ms` for one
   entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
@@ -86,8 +86,8 @@ compiler that supports [C99] or later.
 
 ## Standards
 
-`twc` is compatible with [ISO 9945:2009][POSIX.1-2017] / [POSIX.1-2017][][^2] as
-well as [ISO/IEC 9899][C23] / [C23].[^3] and should produce [ISO 8601][][^4] output.
+`twc` is compatible with [POSIX.1-2017][][^2] as well as [C23][][^3], and
+it should produce [ISO 8601][][^4] output.
 
 ## Acknowledgments
 
@@ -117,15 +117,13 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ `600`
+[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
 [^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
     — Portable Operating System Interface (POSIX®)_, \
     ISO/IEC/IEEE 9945:2009/COR 2:2017. URL: https://pubs.opengroup.org/onlinepubs/9699919799/
-[^3]: _ISO/IEC 9899:2023: Standard for Information Technology
+[^3]: _ISO/IEC 9899: Standard for Information Technology
     — Programming languages — C_, ISO/IEC 9899:2023. \
     URL: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf
-[^4]: _ISO 8601-1:2019: Standard for Information Technology —
-    Date and time \
-    — Representations for information interchange_, ISO 8601-1:2019. \
+[^4]: _ISO 8601: Date and time — Representations for information interchange_, ISO 8601-1:2019. \
     URL: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
