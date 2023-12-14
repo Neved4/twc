@@ -2,7 +2,7 @@
 ![IEEE](https://img.shields.io/badge/POSIX.1&#8209;2017-00629B?logo=ieee&logoColor=fff)
 [![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc/actions/workflows/codeql.yml)
 
-# `twc` - simple world clock in C 🛠️
+# `twc` - Tiny world clock in C! 🛠️
 
 Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
@@ -24,8 +24,8 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
   entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
-- 📦 **Self-contained** - zero dependencies, ISO C99, lighweight (`2676
-  bytes`, `140 lines`).
+- 📦 **Self-contained** - zero dependencies, ISO C99,
+  lighweight (`2736 bytes`, `143 lines`).
 
 ## Getting Started
 
