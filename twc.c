@@ -77,9 +77,8 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 			continue;
 
 		size_t width = strlen(line);
-		if (width > max_width) {
+		if (width > max_width)
 			max_width = width;
-		}
 	}
 
 	max_width++;
@@ -115,9 +114,8 @@ int main(int argc, char **argv) {
 	timefmt = time_fmts[TIMEFMT_ISO];
 
 	const char *tz_env = getenv("TZ");
-	if (tz_env) {
+	if (tz_env)
 		fmt = tz_env;
-	}
 
 	while ((opt = getopt(argc, argv, "hf:s:t:")) != -1) {
 		switch (opt) {
