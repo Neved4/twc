@@ -19,6 +19,8 @@ const char *time_fmts[NTIMEFMT] = {
 	"%F  %T  %z"
 };
 
+const char *file = "/twc/tz.conf";
+
 static void usage(const char *s) {
 	fprintf(stderr, "usage: %s [-h] [-s FORMAT] [-f FILE | -t TIMEZONE]\n", s);
 	exit(EXIT_FAILURE);
@@ -42,7 +44,6 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 			errmsg("could not get the value of the $HOME variable");
 
 		char *conf = home == getenv("HOME") ? "/.config" : "";
-		char *file = "/twc/tz.conf";
 		size_t sizet = strlen(home) + strlen(conf) + strlen(file) + 1;
 		path = malloc(sizet);
 		snprintf(path, sizet, "%s%s%s", home, conf, file);
