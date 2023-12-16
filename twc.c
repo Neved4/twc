@@ -111,9 +111,7 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 int main(int argc, char **argv) {
 	int opt;
 	const char *progname = basename(argv[0]),
-		*timefmt = NULL, *fpath = NULL, *fmt = NULL;
-
-	timefmt = time_fmts[TIMEFMT_ISO];
+		*timefmt = time_fmts[TIMEFMT_ISO], *fpath = NULL, *fmt = NULL;
 
 	const char *tz_env = getenv("TZ");
 	if (tz_env)
