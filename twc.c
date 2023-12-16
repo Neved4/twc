@@ -96,10 +96,6 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 
 		setenv("TZ", line, 1);
 		strftime(timestr, sizeof(timestr), s, localtime(&t));
-
-		while ((sep = strchr(line, '_')))
-			*sep = ' ';
-
 		printf("%-*s%s\n", (int)max_width, line, timestr);
 	}
 
