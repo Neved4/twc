@@ -45,7 +45,7 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 
 		char *conf = home == getenv("HOME") ? "/.config" : "";
 		size_t sizet = strlen(home) + strlen(conf) + strlen(file) + 1;
-		path = malloc(sizet);
+		path = calloc(sizet, sizeof(char));
 		snprintf(path, sizet, "%s%s%s", home, conf, file);
 		fpath = path;
 	}
@@ -68,6 +68,7 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 		strftime(timestr, sizeof(timestr), s, gmtime(&t));
 		int width = strlen(line) + 2;
 		printf("%-*s\n", width, timestr);
+		free(path);
 		return;
 	}
 
@@ -134,11 +135,10 @@ int main(int argc, char **argv) {
 			break;
 		default:
 			usage(progname);
-			return 1;
 		}
 	}
 
 	fparse(timefmt, fpath, fmt);
 
-	return 0;
+	return(EXIT_SUCCESS);
 }
