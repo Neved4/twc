@@ -23,7 +23,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 - 🚀 _**Fast**_ - 5X times faster than `date`.[^1] Only ≈ `8 ms` for one
   entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
-  `version 2023c`.
+  [`version 2023c`].
 - 📦 **Self-contained** - zero dependencies, ISO C99,
   lighweight (`2736 bytes`, `143 lines`).
 
@@ -116,6 +116,7 @@ See the [LICENSE](LICENSE) file for details.
 [ISO 8601]: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[`version 2023c`]: https://www.iana.org/time-zones
 
 [^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
