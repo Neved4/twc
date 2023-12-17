@@ -24,7 +24,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
   entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   [`version 2023c`].
-- 📦 **Self-contained** - zero dependencies, ISO C99,
+- 📦 _**Self-contained**_ - zero dependencies, ISO C99,
   lighweight (`2736 bytes`, `143 lines`).
 
 ## Getting Started
