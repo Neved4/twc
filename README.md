@@ -25,7 +25,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   [`version 2023c`].
 - 📦 _**Self-contained**_ - zero dependencies, ISO C99,
-  lighweight (`2736 bytes`, `143 lines`).
+  lightweight (`132 lines`, `2659 bytes`).
 
 ## Getting Started
 
@@ -46,7 +46,7 @@ cc twc.c -o twc
 
 Alternatively, if you have [`zig`] installed:
 ```console
-$ zig cc twc.c
+$ zig cc twc.c -t twc
 ```
 
 ### Usage
@@ -78,6 +78,13 @@ See also:
     time(3), strftime(3), environ(7)
 ```
 
+### Docker
+
+To compile the binary inside a [Docker] image, run:
+```sh
+docker build .
+```
+
 ## Compatibility
 
 Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on [`x86_64`] and
@@ -87,14 +94,14 @@ compiler that supports [C99] or later.
 ## Standards
 
 `twc` is compatible with [POSIX.1-2017][][^2] as well as [C23][][^3], and
-it should produce [ISO 8601][][^4] output.
+it outputs [ISO 8601][][^4] format.
 
 ## Acknowledgments
 
-Special thanks to everybody who helped me with pointers and _measuring
-optimal memory allocation_, [@K4rakara](https://github.com/K4rakara/) for
-her code review, and [@finnoleary](https://github.com/finnoleary), for
-getting me started.
+Special thanks to everybody who helped me with pointers and memory
+allocation, [@enigmatico](https://gitlab.com/enigmatico) and
+[@K4rakara](https://github.com/K4rakara/) for her code review, and
+[@finnoleary](https://github.com/finnoleary), for getting me started.
 
 ## License
                  
@@ -117,6 +124,7 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [`version 2023c`]: https://www.iana.org/time-zones
+[Docker]: https://www.docker.com/
 
 [^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
