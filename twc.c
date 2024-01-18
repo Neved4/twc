@@ -9,14 +9,11 @@
 #define STR_LENGTH 32
 
 enum {
-	TIMEFMT_ISO,
-	TIMEFMT_HUMAN,
-	NTIMEFMT
+	TIMEFMT_ISO, TIMEFMT_HUMAN, NTIMEFMT
 };
 
 const char *time_fmts[NTIMEFMT] = {
-	"%FT%T%z",
-	"%F  %T  %z"
+	"%FT%T%z", "%F  %T  %z"
 };
 
 const char *file = "/twc/tz.conf";
@@ -32,8 +29,7 @@ static void errmsg(const char *msg) {
 }
 
 static void fparse(const char *s, const char *fpath, const char *fmt) {
-	char timestr[STR_LENGTH];
-	char *line = NULL, *path = NULL, *sep = NULL;
+	char timestr[STR_LENGTH], *line = NULL, *path = NULL;
 	size_t len = 0;
 	FILE *fp;
 
@@ -66,8 +62,8 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 		line = "UTC";
 		setenv("TZ", line, 1);
 		strftime(timestr, sizeof(timestr), s, gmtime(&t));
-		int width = strlen(line) + 2;
-		printf("%-*s\n", width, timestr);
+		size_t width = strlen(line) + 2;
+		printf("%-*s\n", (int)width, timestr);
 		free(path);
 		return;
 	}
@@ -133,6 +129,4 @@ int main(int argc, char **argv) {
 	}
 
 	fparse(timefmt, fpath, fmt);
-
-	return(EXIT_SUCCESS);
 }
