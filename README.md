@@ -52,27 +52,38 @@ $ zig cc twc.c -t twc
 ### Usage
 
 ```
-twc [-h] [-s FORMAT] [-f FILE | -t ENTRY] ...
+twc [-h] [-f path] [-s format] [-t timezone] ...
 
 Options:
-    -h  Prints time in “human-readable” output instead of ISO 8601.
-    -f  Specify a file to read entries from.
-    -s  Use a different date format to print the time.
-    -t  Manually specify a tz database entry.
-
-Files:
-    ~/.config/twc/tz.conf
-        Stores valid tz database identifiers to be displayed by twc.
+  -f path
+      Read config from path (default "$HOME/.config/twc/tz.conf")
+  -h
+      Print in human-readable format
+  -s format
+      Set desired time format (e.g. "%Y-%m-%d")
+  -t timezone
+      specific timezone (e.g. "Asia/Tokyo")
 
 Examples:
-    $ twc -h -s %Y-%m-%d -t Asia/Tokyo
-        2006-01-02
+  Print Tokyo's date in a human-readable format with YY-MM-DD format:
 
-    $ TZ=America/Los_Angeles twc
-        2006-01-02T15:04:05-0800
+    $ twc -h -s %Y-%m-%d -t Asia/Tokyo
+    2024-01-02
+  
+  Print date in Los Angeles using an environment variable for the timezone:
+  
+    $ TZ=America/Los_Angeles twz
+    2024-01-02T15:04:05-0800
 
 Environment:
-    TZ  Timezone to use when displaying dates. See environ(7).
+  TZ
+    Timezone to use when displaying dates.
+  XDG_CONFIG_HOME
+    When defined, it will be used to store the tz.conf file.
+
+Files:
+  ~/.config/twc/tz.conf
+    Stores tz database entries to be displayed.
 
 See also:
     time(3), strftime(3), environ(7)
