@@ -19,8 +19,19 @@ const char *time_fmts[NTIMEFMT] = {
 const char *file = "/twc/tz.conf";
 
 static void usage(const char *s) {
-	fprintf(stderr, "usage: %s [-h] [-s FORMAT] [-f FILE | -t TIMEZONE]\n", s);
-	exit(EXIT_FAILURE);
+    fprintf(stderr,
+        "usage: %s [-h] [-f path] [-s format] [-t timezone] ...\n\n"
+        "Options:\n"
+        "  -f path\n"
+        "        Read config from path (default \"$HOME/.config/twc/tz.conf\")\n"
+        "  -h    Print in human-readable format\n"
+        "  -s format\n"
+        "        Set desired time format (e.g. \"%%Y-%%m-%%d\")\n"
+        "  -t timezone\n"
+        "        Set a specific timezone (e.g. \"Asia/Tokyo\")\n",
+	s);
+
+    exit(EXIT_FAILURE);
 }
 
 static void errmsg(const char *msg) {
