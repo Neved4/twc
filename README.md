@@ -72,7 +72,7 @@ Examples:
   
   Print date in Los Angeles using an environment variable for the timezone:
   
-    $ TZ=America/Los_Angeles twz
+    $ TZ=America/Los_Angeles twc
     2024-01-02T15:04:05-0800
 
 Environment:
