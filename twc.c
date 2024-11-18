@@ -28,8 +28,7 @@ static void usage(const char *s) {
 		"  -s format\n"
 		"        Set desired time format (e.g. \"%%Y-%%m-%%d\")\n"
 		"  -t timezone\n"
-		"        Set a specific timezone (e.g. \"Asia/Tokyo\")\n",
-	s);
+		"        Set a specific timezone (e.g. \"Asia/Tokyo\")\n", s);
 
 	exit(EXIT_FAILURE);
 }
@@ -39,48 +38,51 @@ static void errmsg(const char *msg) {
 	exit(EXIT_FAILURE);
 }
 
+static void ptz(const char *tz, const char *fmt, time_t t, const char *s) {
+	char timestr[STR_LENGTH];
+
+	setenv("TZ", tz, 1);
+	strftime(timestr, sizeof(timestr), fmt, localtime(&t));
+	printf("%-*s%s\n", (int)strlen(tz) + 2, tz, timestr);
+}
+
 static void fparse(const char *s, const char *fpath, const char *fmt) {
-	char timestr[STR_LENGTH], *line = NULL, *path = NULL;
+	char *line = NULL, *path = NULL;
 	size_t len = 0;
 	FILE *fp;
-
-	if (!fpath && !fmt) {
-		char *home = getenv("XDG_CONFIG_HOME");
-		home = (!home || !*home) ? getenv("HOME") : home;
-		if (!home || !*home)
-			errmsg("could not get the value of the $HOME variable");
-
-		char *conf = home == getenv("HOME") ? "/.config" : "";
-		size_t sizet = strlen(home) + strlen(conf) + strlen(file) + 1;
-		path = calloc(sizet, sizeof(char));
-		snprintf(path, sizet, "%s%s%s", home, conf, file);
-		fpath = path;
-	}
-
 	time_t t;
 	time(&t);
 
+	if (!fpath && !fmt) {
+		const char *home = getenv("XDG_CONFIG_HOME");
+		if (!home || !*home) {
+			home = getenv("HOME");
+			if (!home || !*home) {
+				errmsg("could not get $HOMEnor $XDG_CONFIG_HOME values");
+			}
+		}
+
+		char *conf = home == getenv("HOME") ? "/.config" : "";
+		size_t sizet = strlen(home) + strlen(conf_dir) + strlen(file) + 1;
+		path = calloc(sizet, sizeof(char));
+		snprintf(path, sizet, "%s%s%s", home, conf_dir, file);
+		fpath = path;
+	}
+
 	if (fmt) {
-		setenv("TZ", fmt, 1);
-		strftime(timestr, sizeof(timestr), s, localtime(&t));
-		printf("%s\n", timestr);
+		ptz(fmt, s, t, s);
 		free(path);
 		return;
 	}
 
 	fp = fopen(fpath, "r");
 	if (!fp) {
-		line = "UTC";
-		setenv("TZ", line, 1);
-		strftime(timestr, sizeof(timestr), s, gmtime(&t));
-		size_t width = strlen(line) + 2;
-		printf("%-*s\n", (int)width, timestr);
+		ptz("UTC", s, t, s);
 		free(path);
 		return;
 	}
 
 	size_t max_width = 0;
-
 	while (getline(&line, &len, fp) != -1) {
 		if (*line == '#' || *line == '\n')
 			continue;
@@ -101,9 +103,7 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 		if (nl)
 			*nl = '\0';
 
-		setenv("TZ", line, 1);
-		strftime(timestr, sizeof(timestr), s, localtime(&t));
-		printf("%-*s%s\n", (int)max_width, line, timestr);
+		ptz(line, s, t, s);
 	}
 
 	free(line);
