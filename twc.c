@@ -38,7 +38,50 @@ static void err(const char *msg) {
 	exit(EXIT_FAILURE);
 }
 
-static void ptz(const char *tz, const char *fmt, time_t t, const char *s, size_t max_width) {
+static char *confpath(char *fpath) {
+	const char *env;
+
+	if (!fpath) {
+		char *new_fpath = NULL;
+
+		if ((env = getenv("XDG_CONFIG_HOME"))) {
+			asprintf(&new_fpath, "%s/%s", env, conf);
+		} else if ((env = getenv("HOME"))) {
+			asprintf(&new_fpath, "%s/.config/%s", env, conf);
+		} else {
+			err("could not get value of $HOME or $XDG_CONFIG_HOME");
+		}
+
+		return new_fpath;
+	}
+
+	return fpath;
+}
+
+static size_t calcwidth(FILE *fp) {
+	size_t max_width = 0;
+	char *line = NULL;
+	size_t len = 0;
+
+	while (getline(&line, &len, fp) != -1) {
+		if (*line == '#' || *line == '\n')
+			continue;
+
+		char *nl = strchr(line, '\n');
+
+		if (nl)
+			*nl = '\0';
+
+		size_t width = strlen(line);
+		if (width > max_width)
+			max_width = width;
+	}
+
+	free(line);
+	return max_width + 1;
+}
+
+static void tztime(const char *tz, const char *fmt, time_t t, size_t max_width) {
 	char timestr[STR_LENGTH];
 
 	setenv("TZ", tz, 1);
@@ -51,69 +94,47 @@ static void ptz(const char *tz, const char *fmt, time_t t, const char *s, size_t
 	printf("%-*s %s\n", (int)max_width, tz, timestr);
 }
 
-static void fparse(const char *s, char *fpath, const char *fmt) {
+static void parsetz(const char *fmt, const char *s, const char *fpath) {
+	FILE *fp = fopen(fpath, "r");
+	if (!fp) {
+		time_t t;
+		time(&t);
+		tztime("UTC", s, t, 0);
+		return;
+	}
+
+	size_t max_width = calcwidth(fp);
+	rewind(fp);
+
 	char *line = NULL;
-	const char *env;
 	size_t len = 0;
-	FILE *fp;
 	time_t t;
 	time(&t);
 
-	if (fmt) {
-		ptz(fmt, s, t, s, 0);
-		return;
-	}
-
-	if (!fpath && !fmt) {
-		if ((env = getenv("XDG_CONFIG_HOME")))
-			asprintf(&fpath, "%s/%s", env, conf);
-		else if ((env = getenv("HOME")))
-			asprintf(&fpath, "%s/.config/%s", env, conf);
-		else
-			err("could not get value of $HOME or $XDG_CONFIG_HOME");
-	}
-
-	if (!fpath) {
-		err("Cannot open configuration file.");
-	}
-
-	fp = fopen(fpath, "r");
-	if (!fp) {
-		ptz("UTC", s, t, s, 0);
-		return;
-	}
-
-	size_t max_width = 0;
 	while (getline(&line, &len, fp) != -1) {
 		if (*line == '#' || *line == '\n')
 			continue;
 
 		char *nl = strchr(line, '\n');
-		if (nl)
-			*nl = '\0';
+		if (nl) *nl = '\0';
 
-		size_t width = strlen(line);
-		if (width > max_width)
-			max_width = width;
-	}
-
-	max_width++;
-	rewind(fp);
-
-	while (getline(&line, &len, fp) != -1) {
-		if (*line == '#' || *line == '\n')
-			continue;
-
-		char *nl = strchr(line, '\n');
-		if (nl)
-			*nl = '\0';
-
-		ptz(line, s, t, s, max_width);
+		tztime(line, s, t, max_width);
 	}
 
 	free(line);
-	free(fpath);
 	fclose(fp);
+}
+
+static void fparse(const char *s, char *fpath, const char *fmt) {
+	if (fmt) {
+		time_t t;
+		time(&t);
+		tztime(fmt, s, t, 0);
+		return;
+	}
+
+	fpath = confpath(fpath);
+	parsetz(fmt, s, fpath);
 }
 
 int main(int argc, char **argv) {
