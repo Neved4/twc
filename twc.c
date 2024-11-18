@@ -33,7 +33,7 @@ static void usage(const char *s) {
 	exit(EXIT_FAILURE);
 }
 
-static void errmsg(const char *msg) {
+static void err(const char *msg) {
 	fprintf(stderr, "error: %s\n", msg);
 	exit(EXIT_FAILURE);
 }
@@ -46,27 +46,22 @@ static void ptz(const char *tz, const char *fmt, time_t t, const char *s) {
 	printf("%-*s%s\n", (int)strlen(tz) + 2, tz, timestr);
 }
 
-static void fparse(const char *s, const char *fpath, const char *fmt) {
+static void fparse(const char *s, char *fpath, const char *fmt) {
 	char *line = NULL, *path = NULL;
+	const char *env;
 	size_t len = 0;
 	FILE *fp;
 	time_t t;
 	time(&t);
 
 	if (!fpath && !fmt) {
-		const char *home = getenv("XDG_CONFIG_HOME");
-		if (!home || !*home) {
-			home = getenv("HOME");
-			if (!home || !*home) {
-				errmsg("could not get $HOMEnor $XDG_CONFIG_HOME values");
-			}
+		if ((env = getenv("XDG_CONFIG_HOME"))) {
+			asprintf(&fpath, "%s/twc", env);
+		} else if ((env = getenv("HOME"))) {
+			asprintf(&fpath, "%s/.config/twc", env);
+		} else {
+			err("could not get value of $HOME or $XDG_CONFIG_HOME");
 		}
-
-		char *conf = home == getenv("HOME") ? "/.config" : "";
-		size_t sizet = strlen(home) + strlen(conf_dir) + strlen(file) + 1;
-		path = calloc(sizet, sizeof(char));
-		snprintf(path, sizet, "%s%s%s", home, conf_dir, file);
-		fpath = path;
 	}
 
 	if (fmt) {
@@ -113,10 +108,11 @@ static void fparse(const char *s, const char *fpath, const char *fmt) {
 
 int main(int argc, char **argv) {
 	int opt;
+	char *fpath = NULL;
 	const char *progname = basename(argv[0]),
-		*timefmt = time_fmts[TIMEFMT_ISO], *fpath = NULL, *fmt = NULL;
+		*timefmt = time_fmts[TIMEFMT_ISO], *fmt = NULL,
+		*tz_env = getenv("TZ");
 
-	const char *tz_env = getenv("TZ");
 	if (tz_env)
 		fmt = tz_env;
 
