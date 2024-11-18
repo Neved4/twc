@@ -1,4 +1,4 @@
-[![C](https://img.shields.io/badge/ISO_C99-A8B9CC?logo=c&logoColor=fff)][C99]
+[![C](https://img.shields.io/badge/ISO_C17-A8B9CC?logo=c&logoColor=fff)][C17]
 ![IEEE](https://img.shields.io/badge/POSIX.1&#8209;2017-00629B?logo=ieee&logoColor=fff)
 [![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc/actions/workflows/codeql.yml)
 
@@ -24,8 +24,8 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
   entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   [`version 2023c`].
-- 📦 _**Self-contained**_ - zero dependencies, ISO C99,
-  lightweight (`143 lines`, `2879 bytes`).
+- 📦 _**Self-contained**_ - zero dependencies, ISO C17,
+  lightweight (`143 lines`, `2687 bytes`).
 
 ## Getting Started
 
@@ -100,7 +100,7 @@ docker build .
 
 Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on [`x86_64`] and
 [`arm64`], and compiles with [`zig`], [`clang`], [`gcc`], [`tcc`] and any other
-compiler that supports [C99] or later.
+compiler that supports [C17] or later.
 
 ## Standards
 
@@ -128,8 +128,8 @@ See the [LICENSE](LICENSE) file for details.
 [`tcc`]: https://bellard.org/tcc/
 [`zig`]: https://ziglang.org/
 [MIT License]: https://opensource.org/license/mit/
-[C23]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
-[C99]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
+[C23]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf
+[C17]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2310.pdf
 [POSIX.1-2017]: https://pubs.opengroup.org/onlinepubs/9699919799/
 [ISO 8601]: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
