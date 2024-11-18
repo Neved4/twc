@@ -25,7 +25,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   [`version 2023c`].
 - 📦 _**Self-contained**_ - zero dependencies, ISO C99,
-  lightweight (`143 lines`, `2980 bytes`).
+  lightweight (`143 lines`, `2879 bytes`).
 
 ## Getting Started
 
