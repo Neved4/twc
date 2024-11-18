@@ -16,7 +16,7 @@ const char *time_fmts[NTIMEFMT] = {
 	"%FT%T%z", "%F  %T  %z"
 };
 
-const char *file = "/twc/tz.conf";
+const char *conf = "twc/tz.conf";
 
 static void usage(const char *s) {
 	fprintf(stderr,
@@ -38,42 +38,48 @@ static void err(const char *msg) {
 	exit(EXIT_FAILURE);
 }
 
-static void ptz(const char *tz, const char *fmt, time_t t, const char *s) {
+static void ptz(const char *tz, const char *fmt, time_t t, const char *s, size_t max_width) {
 	char timestr[STR_LENGTH];
 
 	setenv("TZ", tz, 1);
-	strftime(timestr, sizeof(timestr), fmt, localtime(&t));
-	printf("%-*s%s\n", (int)strlen(tz) + 2, tz, timestr);
+
+	if (strftime(timestr, sizeof(timestr), fmt, localtime(&t)) == 0) {
+		fprintf(stderr, "error: failed to format time for timezone: %s\n", tz);
+		return;
+	}
+
+	printf("%-*s %s\n", (int)max_width, tz, timestr);
 }
 
 static void fparse(const char *s, char *fpath, const char *fmt) {
-	char *line = NULL, *path = NULL;
+	char *line = NULL;
 	const char *env;
 	size_t len = 0;
 	FILE *fp;
 	time_t t;
 	time(&t);
 
-	if (!fpath && !fmt) {
-		if ((env = getenv("XDG_CONFIG_HOME"))) {
-			asprintf(&fpath, "%s/twc", env);
-		} else if ((env = getenv("HOME"))) {
-			asprintf(&fpath, "%s/.config/twc", env);
-		} else {
-			err("could not get value of $HOME or $XDG_CONFIG_HOME");
-		}
+	if (fmt) {
+		ptz(fmt, s, t, s, 0);
+		return;
 	}
 
-	if (fmt) {
-		ptz(fmt, s, t, s);
-		free(path);
-		return;
+	if (!fpath && !fmt) {
+		if ((env = getenv("XDG_CONFIG_HOME")))
+			asprintf(&fpath, "%s/%s", env, conf);
+		else if ((env = getenv("HOME")))
+			asprintf(&fpath, "%s/.config/%s", env, conf);
+		else
+			err("could not get value of $HOME or $XDG_CONFIG_HOME");
+	}
+
+	if (!fpath) {
+		err("Cannot open configuration file.");
 	}
 
 	fp = fopen(fpath, "r");
 	if (!fp) {
-		ptz("UTC", s, t, s);
-		free(path);
+		ptz("UTC", s, t, s, 0);
 		return;
 	}
 
@@ -81,6 +87,10 @@ static void fparse(const char *s, char *fpath, const char *fmt) {
 	while (getline(&line, &len, fp) != -1) {
 		if (*line == '#' || *line == '\n')
 			continue;
+
+		char *nl = strchr(line, '\n');
+		if (nl)
+			*nl = '\0';
 
 		size_t width = strlen(line);
 		if (width > max_width)
@@ -98,11 +108,11 @@ static void fparse(const char *s, char *fpath, const char *fmt) {
 		if (nl)
 			*nl = '\0';
 
-		ptz(line, s, t, s);
+		ptz(line, s, t, s, max_width);
 	}
 
 	free(line);
-	free(path);
+	free(fpath);
 	fclose(fp);
 }
 
