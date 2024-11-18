@@ -1,7 +1,7 @@
 #!/bin/sh
 
 version=1.1.0
-export CFLAGS=-O2
+export CFLAGS=-Oz
 
 clang -arch arm64 -o twc twc.c
 tar -czvf twc-$version-arm64-apple-darwin.tar.gz twc
