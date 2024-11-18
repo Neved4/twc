@@ -1,1 +1,1 @@
-CFLAGS = -Oz -std=c99
+CFLAGS = -Oz -std=c17
