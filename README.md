@@ -1,6 +1,7 @@
 [![C](https://img.shields.io/badge/ISO_C17-A8B9CC?logo=c&logoColor=fff)][C17]
 ![IEEE](https://img.shields.io/badge/POSIX.1&#8209;2017-00629B?logo=ieee&logoColor=fff)
 [![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc/actions/workflows/codeql.yml)
+[![Homebrew](https://img.shields.io/badge/Homebrew-tap-2AAB47?logo=homebrew&logoColor=959DA5&labelColor=2B3137)](https://github.com/Neved4/homebrew-tap/blob/main/Formula/gotwc.rb)
 
 # `twc` - Tiny world clock in C! 🛠️
 
@@ -38,6 +39,13 @@ If you are building [`twc`], you'll need:
 - If `asprintf` is not present, you can ship it from [Neved4/asprintf]
 
 ### Installing
+
+If you have [Homebrew] installed, just run:
+```console
+$ brew tap Neved4/homebrew-tap/gotwc
+```
+
+### Building
 
 Clone the repository:
 
@@ -126,7 +134,7 @@ allocation, [@enigmatico](https://gitlab.com/enigmatico) and
 [@finnoleary](https://github.com/finnoleary), for getting me started.
 
 ## License
-                 
+
 `twc` is licensed under the terms of the [MIT License].
 
 See the [LICENSE](LICENSE) file for details.
@@ -151,6 +159,7 @@ See the [LICENSE](LICENSE) file for details.
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [`version 2023c`]: https://www.iana.org/time-zones
 [Docker]: https://www.docker.com/
+[Homebrew]: https://brew.sh/
 
 [^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
