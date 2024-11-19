@@ -29,7 +29,15 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 ## Getting Started
 
-### Setup
+### Prerequisites
+
+If you are building [`twc`], you'll need:
+
+- A [C] compiler that supports [C99] or later
+- A system with a working `asprintf` implementation
+- If `asprintf` is not present, you can ship it from [Neved4/asprintf]
+
+### Installing
 
 Clone the repository:
 
@@ -102,9 +110,12 @@ Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on [`x86_64`] and
 [`arm64`], and compiles with [`zig`], [`clang`], [`gcc`], [`tcc`] and any other
 compiler that supports [C17] or later.
 
+Also builds on any [C99] compiler on systems that supports and have
+`asprintf()`.
+
 ## Standards
 
-`twc` is compatible with [POSIX.1-2017][][^2] as well as [C23][][^3], and
+`twc` is compatible with [POSIX.1-2024][][^2] as well as [C23][][^3], and
 it outputs [ISO 8601][][^4] format.
 
 ## Acknowledgments
@@ -120,6 +131,8 @@ allocation, [@enigmatico](https://gitlab.com/enigmatico) and
 
 See the [LICENSE](LICENSE) file for details.
 
+[Neved4/asprintf]: https://github.com/Neved4/asprintf
+[`twc`]: https://github.com/Neved4/twc
 [`hyperfine`]: https://github.com/sharkdp/hyperfine
 [`arm64`]: https://en.wikipedia.org/wiki/AArch64
 [`x86_64`]: https://en.wikipedia.org/wiki/X86-64
@@ -128,9 +141,11 @@ See the [LICENSE](LICENSE) file for details.
 [`tcc`]: https://bellard.org/tcc/
 [`zig`]: https://ziglang.org/
 [MIT License]: https://opensource.org/license/mit/
-[C23]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf
+[C]: https://en.wikipedia.org/wiki/C_(programming_language)
+[C99]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
 [C17]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2310.pdf
-[POSIX.1-2017]: https://pubs.opengroup.org/onlinepubs/9699919799/
+[C23]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf
+[POSIX.1-2024]: https://pubs.opengroup.org/onlinepubs/9799919799/
 [ISO 8601]: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
