@@ -34,40 +34,39 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 
 If you are building [`twc`], you'll need:
 
-- A [C] compiler that supports [C99] or later
-- A system with a working `asprintf` implementation
-- If `asprintf` is not present, you can ship it from [Neved4/asprintf]
+- A [C] compiler that supports [C99] or later.
+- A system with a working `asprintf` implementation.
+- If `asprintf` is not present, you can use the one from [Neved4/asprintf].
 
 ### Installing
 
 If you have [Homebrew] installed, just run:
-```console
-$ brew install Neved4/homebrew-tap/twc
+```shell
+brew install Neved4/homebrew-tap/twc
 ```
 
 ### Building
 
 Clone the repository:
 
-```sh
+```shell
 git clone https://github.com/Neved4/twc
 ```
 
 Build the sources:
 
-```console
-$ make twc
-cc twc.c -o twc
+```shell
+make twc
 ```
 
 Alternatively, if you have [`zig`] installed:
-```console
-$ zig cc twc.c -t twc
+```shell
+zig cc twc.c -t twc
 ```
 
 ### Usage
 
-```
+```text
 twc [-h] [-f path] [-s format] [-t timezone] ...
 
 Options:
@@ -81,7 +80,7 @@ Options:
       specific timezone (e.g. "Asia/Tokyo")
 
 Examples:
-  Print Tokyo's date in a human-readable format with YY-MM-DD format:
+  Print Tokyo date in a human-readable format with YY-MM-DD format:
 
     $ twc -h -s %Y-%m-%d -t Asia/Tokyo
     2024-01-02
@@ -108,7 +107,7 @@ See also:
 ### Docker
 
 To compile the binary inside a [Docker] image, run:
-```sh
+```shell
 docker build .
 ```
 
