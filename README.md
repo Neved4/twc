@@ -8,6 +8,8 @@
 Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
+It works similar to [zdump(8)](https://man.freebsd.org/cgi/man.cgi?query=zdump&apropos=0&sektion=0&manpath=FreeBSD+7.0-RELEASE&format=html), but it lets you format the output more precisely:
+
 ```console
 $ twc -h -f tools/samples/tz-small.conf
 America/New York     2024-12-10  16:39:43  -0500
@@ -36,7 +38,7 @@ If you are building [`twc`], you'll need:
 
 - A [C] compiler that supports [C99] or later.
 - A system with a working `asprintf` implementation.
-- If `asprintf` is not present, you can use the one from [Neved4/asprintf].
+- If `asprintf` is not present, you can use [Neved4/asprintf].
 
 ### Installing
 
@@ -65,6 +67,8 @@ zig cc twc.c -t twc
 ```
 
 ### Usage
+
+These are the options available:
 
 ```text
 twc [-h] [-f path] [-s format] [-t timezone] ...
@@ -125,11 +129,19 @@ Also builds on any [C99] compiler on systems that supports and have
 `twc` is compatible with [POSIX.1-2024][][^2] as well as [C23][][^3], and
 it outputs [ISO 8601][][^4] format.
 
+## See Also
+
+[glibc - zdump.c](https://github.com/apple-oss-distributions/system_cmds/blob/56f28fa802f4c21f687637fac27793932eedfbb3/zdump/zdump.c)
+[apple - zdump.c](https://github.com/apple-oss-distributions/ICU/blob/94e6377723b098e967e7841c9be6550e27e6872b/icu/icu4c/source/tools/tzcode/zdump.c#L94)
+[FreeBSD - zdump.c](https://github.com/freebsd/freebsd-src/blob/main/contrib/tzcode/zdump.c)
+[OpenBSD - zdump.c](https://github.com/openbsd/src/blob/master/usr.sbin/zdump/zdump.c)
+[Boruch Baum zdump3](https://github.com/Boruch-Baum/zdump-3-/blob/master/zdump3.c)
+
 ## Acknowledgments
 
-Special thanks to everybody who helped me with pointers and memory
-allocation, [@enigmatico](https://gitlab.com/enigmatico) and
-[@K4rakara](https://github.com/K4rakara/) for her code review, and
+Special thanks to everybody who helped me with pointers and memory allocation,
+[@navi](https://git.vlhl.dev/navi), [@enigmatico](https://gitlab.com/enigmatico)
+and [@K4rakara](https://github.com/K4rakara/) for their code reviews, and thx to
 [@finnoleary](https://github.com/finnoleary), for getting me started.
 
 ## License
@@ -162,9 +174,9 @@ See the [LICENSE](LICENSE) file for details.
 
 [^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
-[^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
+[^2]: _IEEE Std 1003.1-2024: Standard for Information Technology
     — Portable Operating System Interface (POSIX®)_, \
-    ISO/IEC/IEEE 9945:2009/COR 2:2017. URL: https://pubs.opengroup.org/onlinepubs/9699919799/
+    ISO/IEC DIS 9945. URL: https://pubs.opengroup.org/onlinepubs/9799919799/
 [^3]: _ISO/IEC 9899: Standard for Information Technology
     — Programming languages — C_, ISO/IEC 9899:2023. \
     URL: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf
