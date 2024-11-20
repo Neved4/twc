@@ -10,13 +10,13 @@ Fast, CLI world clock that displays time zone information using
 
 ```console
 $ twc -h -f tools/samples/tz-small.conf
-America/New York     2023-12-10  16:39:43  -0500
-America/Los Angeles  2023-12-10  13:39:43  -0800
-UTC                  2023-12-10  21:39:43  +0000
-Europe/London        2023-12-10  21:39:43  +0000
-Europe/Paris         2023-12-10  22:39:43  +0100
-Asia/Tokyo           2023-12-11  06:39:43  +0900
-Australia/Sydney     2023-12-11  08:39:43  +1100
+America/New York     2024-12-10  16:39:43  -0500
+America/Los Angeles  2024-12-10  13:39:43  -0800
+UTC                  2024-12-10  21:39:43  +0000
+Europe/London        2024-12-10  21:39:43  +0000
+Europe/Paris         2024-12-10  22:39:43  +0100
+Asia/Tokyo           2024-12-11  06:39:43  +0900
+Australia/Sydney     2024-12-11  08:39:43  +1100
 ```
 
 ### Highlights
@@ -24,7 +24,7 @@ Australia/Sydney     2023-12-11  08:39:43  +1100
 - 🚀 _**Fast**_ - 5X times faster than `date`.[^1] Only ≈ `8 ms` for one
   entry, and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
-  [`version 2023c`].
+  [`version 2024b`].
 - 📦 _**Self-contained**_ - zero dependencies, ISO C17,
   lightweight (`143 lines`, `3251 bytes`).
 
@@ -156,7 +156,7 @@ See the [LICENSE](LICENSE) file for details.
 [ISO 8601]: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[`version 2023c`]: https://www.iana.org/time-zones
+[`version 2024b`]: https://www.iana.org/time-zones
 [Docker]: https://www.docker.com/
 [Homebrew]: https://brew.sh/
 
