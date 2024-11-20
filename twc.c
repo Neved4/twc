@@ -43,17 +43,17 @@ static char *confpath(char *fpath) {
 	const char *env;
 
 	if (!fpath) {
-		char *new_fpath = NULL;
+		char *npath = NULL;
 
 		if ((env = getenv("XDG_CONFIG_HOME"))) {
-			asprintf(&new_fpath, "%s/%s", env, conf);
+			asprintf(&npath, "%s/%s", env, conf);
 		} else if ((env = getenv("HOME"))) {
-			asprintf(&new_fpath, "%s/.config/%s", env, conf);
+			asprintf(&npath, "%s/.config/%s", env, conf);
 		} else {
 			err("could not get value of $HOME or $XDG_CONFIG_HOME");
 		}
 
-		return new_fpath;
+		return npath;
 	}
 
 	return fpath;
