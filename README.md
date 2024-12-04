@@ -144,7 +144,7 @@ Various [`zdump`][zdump(8)] implementations:
 Special thanks to everybody who helped me with pointers and memory allocation,
 [@navi](https://git.vlhl.dev/navi), [@enigmatico](https://gitlab.com/enigmatico)
 and [@K4rakara](https://github.com/K4rakara/) for their code reviews, and thx to
-[@finnoleary](https://github.com/finnoleary), for getting me started.
+[@lexiwitch](https://github.com/lexiwitch), for getting me started.
 
 ## License
 
