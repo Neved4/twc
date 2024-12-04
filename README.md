@@ -8,7 +8,7 @@
 Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
-It works similar to [zdump(8)](https://man.freebsd.org/cgi/man.cgi?query=zdump&apropos=0&sektion=0&manpath=FreeBSD+7.0-RELEASE&format=html), but it lets you format the output more precisely:
+It works similar to [zdump(8)], but it lets you format the output more precisely:
 
 ```console
 $ twc -h -f tools/samples/tz-small.conf
@@ -131,11 +131,13 @@ it outputs [ISO 8601][][^4] format.
 
 ## See Also
 
-[glibc - zdump.c](https://github.com/apple-oss-distributions/system_cmds/blob/56f28fa802f4c21f687637fac27793932eedfbb3/zdump/zdump.c)  
-[apple - zdump.c](https://github.com/apple-oss-distributions/ICU/blob/94e6377723b098e967e7841c9be6550e27e6872b/icu/icu4c/source/tools/tzcode/zdump.c#L94)  
-[FreeBSD - zdump.c](https://github.com/freebsd/freebsd-src/blob/main/contrib/tzcode/zdump.c)  
-[OpenBSD - zdump.c](https://github.com/openbsd/src/blob/master/usr.sbin/zdump/zdump.c)  
-[Boruch Baum zdump3](https://github.com/Boruch-Baum/zdump-3-/blob/master/zdump3.c)
+Various [`zdump`][zdump(8)] implementations:
+
+- [glibc - zdump.c](https://github.com/apple-oss-distributions/system_cmds/blob/56f28fa802f4c21f687637fac27793932eedfbb3/zdump/zdump.c)  
+- [apple - zdump.c](https://github.com/apple-oss-distributions/ICU/blob/94e6377723b098e967e7841c9be6550e27e6872b/icu/icu4c/source/tools/tzcode/zdump.c#L94)  
+- [FreeBSD - zdump.c](https://github.com/freebsd/freebsd-src/blob/main/contrib/tzcode/zdump.c)  
+- [OpenBSD - zdump.c](https://github.com/openbsd/src/blob/master/usr.sbin/zdump/zdump.c)  
+- [Boruch Baum - zdump3](https://github.com/Boruch-Baum/zdump-3-/blob/master/zdump3.c)
 
 ## Acknowledgments
 
@@ -171,6 +173,7 @@ See the [LICENSE](LICENSE) file for details.
 [`version 2024b`]: https://www.iana.org/time-zones
 [Docker]: https://www.docker.com/
 [Homebrew]: https://brew.sh/
+[zdump(8)]: https://man.freebsd.org/cgi/man.cgi?query=zdump&apropos=0&sektion=0&manpath=FreeBSD+7.0-RELEASE&format=html
 
 [^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
