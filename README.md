@@ -8,7 +8,8 @@
 Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
 
-It works similar to [zdump(8)], but it lets you format the output more precisely:
+It works similar to [zdump(8)], but it lets you format the output more
+precisely:
 
 ```console
 $ twc -h -f tools/samples/tz-small.conf
