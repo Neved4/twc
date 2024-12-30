@@ -64,7 +64,7 @@ make twc
 
 Alternatively, if you have [`zig`] installed:
 ```shell
-zig cc twc.c -t twc
+zig cc twc.c -o twc
 ```
 
 ### Usage
