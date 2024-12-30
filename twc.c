@@ -1,3 +1,7 @@
+#define _POSIX_C_SOURCE 202405L
+#define _XOPEN_SOURCE 800
+#define _GNU_SOURCE
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,8 +9,6 @@
 #include <time.h>
 #include <unistd.h>
 
-// #define _POSIX_C_SOURCE 202405L
-// #define _XOPEN_SOURCE 800
 #define STR_LENGTH 32
 
 enum {

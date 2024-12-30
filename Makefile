@@ -1,4 +1,4 @@
-CFLAGS = -Oz # -std=c17
+CFLAGS = -Oz -std=c17
 
 clean:
 	rm -f twc
