@@ -1,4 +1,4 @@
-CFLAGS = -Oz -std=c17
+CFLAGS = -Oz -std=c17 -D_POSIX_C_SOURCE=202405L -D_XOPEN_SOURCE=800 -D_GNU_SOURCE
 
 clean:
 	rm -f twc
