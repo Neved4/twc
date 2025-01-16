@@ -121,6 +121,8 @@ static void parsetz(const char *fmt, const char *s, const char *fpath) {
 	}
 
 	free(line);
+	line = NULL;
+
 	fclose(fp);
 }
 
