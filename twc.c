@@ -94,6 +94,8 @@ static void tztime(const char *tz, const char *fmt, time_t t, size_t max_width) 
 }
 
 static void parsetz(const char *fmt, const char *s, const char *fpath) {
+	(void)fmt;
+
 	FILE *fp = fopen(fpath, "r");
 	if (!fp) {
 		time_t t;
