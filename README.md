@@ -89,9 +89,9 @@ Examples:
 
     $ twc -h -s %Y-%m-%d -t Asia/Tokyo
     2024-01-02
-  
+
   Print date in Los Angeles using an environment variable for the timezone:
-  
+
     $ TZ=America/Los_Angeles twc
     2024-01-02T15:04:05-0800
 
@@ -134,10 +134,10 @@ it outputs [ISO 8601][][^4] format.
 
 Various [`zdump`][zdump(8)] implementations:
 
-- [glibc - zdump.c](https://github.com/apple-oss-distributions/system_cmds/blob/56f28fa802f4c21f687637fac27793932eedfbb3/zdump/zdump.c)  
-- [apple - zdump.c](https://github.com/apple-oss-distributions/ICU/blob/94e6377723b098e967e7841c9be6550e27e6872b/icu/icu4c/source/tools/tzcode/zdump.c#L94)  
-- [FreeBSD - zdump.c](https://github.com/freebsd/freebsd-src/blob/main/contrib/tzcode/zdump.c)  
-- [OpenBSD - zdump.c](https://github.com/openbsd/src/blob/master/usr.sbin/zdump/zdump.c)  
+- [glibc - zdump.c](https://github.com/apple-oss-distributions/system_cmds/blob/main/zdump/zdump.c)
+- [apple - zdump.c](https://github.com/apple-oss-distributions/ICU/blob/main/icu/icu4c/source/tools/tzcode/zdump.c#L94)
+- [FreeBSD - zdump.c](https://github.com/freebsd/freebsd-src/blob/main/contrib/tzcode/zdump.c)
+- [OpenBSD - zdump.c](https://github.com/openbsd/src/blob/master/usr.sbin/zdump/zdump.c)
 - [Boruch Baum - zdump3](https://github.com/Boruch-Baum/zdump-3-/blob/master/zdump3.c)
 
 ## Acknowledgments
