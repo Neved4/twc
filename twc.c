@@ -8,12 +8,12 @@
 #define STR_LENGTH 32
 
 enum {
-	TIMEFMT_ISO, TIMEFMT_HUMAN, NTIMEFMT
+	TIMEFMT_ISO,
+	TIMEFMT_HUMAN,
+	NTIMEFMT
 };
 
-const char *time_fmts[NTIMEFMT] = {
-	"%FT%T%z", "%F  %T  %z"
-};
+const char *time_fmts[NTIMEFMT] = { "%FT%T%z", "%F  %T  %z" };
 
 const char *conf = "twc/tz.conf";
 
@@ -22,12 +22,14 @@ static void usage(const char *s) {
 		"usage: %s [-h] [-f path] [-s format] [-t timezone] ...\n\n"
 		"Options:\n"
 		"  -f path\n"
-		"        Read config from path (default \"$HOME/.config/twc/tz.conf\")\n"
+		"        Read config from path (default "
+		"\"$HOME/.config/twc/tz.conf\")\n"
 		"  -h    Print in human-readable format\n"
 		"  -s format\n"
 		"        Set desired time format (e.g. \"%%Y-%%m-%%d\")\n"
 		"  -t timezone\n"
-		"        Set a specific timezone (e.g. \"Asia/Tokyo\")\n", s);
+		"        Set a specific timezone (e.g. \"Asia/Tokyo\")\n",
+		s);
 
 	exit(EXIT_FAILURE);
 }
@@ -63,8 +65,9 @@ static size_t calcwidth(FILE *fp) {
 	size_t len = 0;
 
 	while (getline(&line, &len, fp) != -1) {
-		if (*line == '#' || *line == '\n')
+		if (*line == '#' || *line == '\n') {
 			continue;
+		}
 
 		char *nl = strchr(line, '\n');
 
@@ -80,7 +83,10 @@ static size_t calcwidth(FILE *fp) {
 	return max_width + 1;
 }
 
-static void tztime(const char *tz, const char *fmt, time_t t, size_t max_width) {
+static void tztime(const char *tz,
+	const char *fmt,
+	time_t t,
+	size_t max_width) {
 	char timestr[STR_LENGTH];
 
 	setenv("TZ", tz, 1);
@@ -113,11 +119,13 @@ static void parsetz(const char *fmt, const char *s, const char *fpath) {
 	time(&t);
 
 	while (getline(&line, &len, fp) != -1) {
-		if (*line == '#' || *line == '\n')
+		if (*line == '#' || *line == '\n') {
 			continue;
+		}
 
 		char *nl = strchr(line, '\n');
-		if (nl) *nl = '\0';
+		if (nl)
+			*nl = '\0';
 
 		tztime(line, s, t, max_width);
 	}
@@ -143,9 +151,8 @@ static void fparse(const char *s, char *fpath, const char *fmt) {
 int main(int argc, char **argv) {
 	int opt;
 	char *fpath = NULL;
-	const char *progname = basename(argv[0]),
-		*timefmt = time_fmts[TIMEFMT_ISO], *fmt = NULL,
-		*tz_env = getenv("TZ");
+	const char *progname = basename(argv[0]), *timefmt = time_fmts[TIMEFMT_ISO],
+			   *fmt = NULL, *tz_env = getenv("TZ");
 
 	if (tz_env)
 		fmt = tz_env;
