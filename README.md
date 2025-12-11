@@ -12,7 +12,7 @@ It works similar to [zdump(8)], but it lets you format the output more
 precisely:
 
 ```console
-$ twc -h -f tools/samples/tz-small.conf
+$ twc -h -f test/data/tz-small.conf
 America/New York     2024-12-10  16:39:43  -0500
 America/Los Angeles  2024-12-10  13:39:43  -0800
 UTC                  2024-12-10  21:39:43  +0000
@@ -33,7 +33,7 @@ Australia/Sydney     2024-12-11  08:39:43  +1100
 
 ### Benchmarks vs `gotwc`
 
-`hyperfine -N --warmup 3 --runs 10 -f tz_test.conf` (599 zones):
+`hyperfine -N --warmup 3 --runs 10 -f test/data/tz-test.conf` (599 zones):
 
 - Debian stable (amd64 via emulation): `twc` 3.7 ms ±1.3, `gotwc` 3.2 ms
   ±0.3 on main; `twc` 2.5 ms ±0.0, `gotwc` 2.8 ms ±0.1 on `perf-tzlist-cache`.
