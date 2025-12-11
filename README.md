@@ -31,6 +31,22 @@ Australia/Sydney     2024-12-11  08:39:43  +1100
 - 📦 _**Self-contained**_ - zero dependencies, ISO C17,
   lightweight (`175 lines`, `3235 bytes`).
 
+### Benchmarks vs `gotwc`
+
+`hyperfine -N --warmup 3 --runs 10 -f tz_test.conf` (599 zones):
+
+- Debian stable (amd64 via emulation): `twc` 3.7 ms ±1.3, `gotwc` 3.2 ms
+  ±0.3 on main; `twc` 2.5 ms ±0.0, `gotwc` 2.8 ms ±0.1 on `perf-tzlist-cache`.
+- macOS arm64: `twc` 138.9 ms ±3.0, `gotwc` 15.7 ms ±0.3 on main; `twc`
+  138.2 ms ±1.6, `gotwc` 15.0 ms ±0.2 on `perf-tzlist-cache`.
+
+Why macOS is slower: `twc` sets `TZ` and calls `localtime` per entry, so
+Apple libc re-parses zoneinfo each time. `gotwc` loads each zone once and
+formats from cached data. On glibc/FreeBSD with `tzalloc` you can cache
+handles to close the gap; macOS lacks `tzalloc`, so a faster path would
+need a cached zoneinfo parser (e.g., CoreFoundation `CFTimeZone`) instead
+of the per-call `TZ` swap.
+
 ## Getting Started
 
 ### Prerequisites
