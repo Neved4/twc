@@ -1,5 +1,0 @@
-.editorconfig linguist-vendored
-.vscode       linguist-vendored
-Dockerfile    linguist-vendored
-Makefile      linguist-vendored
-tools/**      linguist-vendored
