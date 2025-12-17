@@ -5,8 +5,8 @@
 
 # `twc` - Tiny world clock in C! 🛠️
 
-Fast, CLI world clock that displays time zone information using
-[tz database] to read valid [tz entries].
+Fast, CLI world clock that displays time zone information using [tz database] to
+read valid [tz entries].
 
 It works similar to [zdump(8)], but it lets you format the output more
 precisely:
@@ -24,28 +24,27 @@ Australia/Sydney     2024-12-11  08:39:43  +1100
 
 ### Highlights
 
-- 🚀 _**Fast**_ - 5X times faster than `date`.[^1] Only ≈ `8 ms` for one
-  entry, and ≈ `177 ms` for ≈ 600 entries.
+- 🚀 _**Fast**_ - 5X times faster than `date`.[^1] Only ≈ `8 ms` for one entry,
+  and ≈ `177 ms` for ≈ 600 entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
-  [`version 2024b`].
-- 📦 _**Self-contained**_ - zero dependencies, ISO C17,
-  lightweight (`175 lines`, `3235 bytes`).
+  [`version 2025c`].
+- 📦 _**Self-contained**_ - zero dependencies, ISO C17, lightweight
+  (`175 lines`, `3235 bytes`).
 
 ### Benchmarks vs `gotwc`
 
 `hyperfine -N --warmup 3 --runs 10 -f test/data/tz-test.conf` (599 zones):
 
-- Debian stable (amd64 via emulation): `twc` 3.7 ms ±1.3, `gotwc` 3.2 ms
-  ±0.3 on main; `twc` 2.5 ms ±0.0, `gotwc` 2.8 ms ±0.1 on `perf-tzlist-cache`.
-- macOS arm64: `twc` 138.9 ms ±3.0, `gotwc` 15.7 ms ±0.3 on main; `twc`
-  138.2 ms ±1.6, `gotwc` 15.0 ms ±0.2 on `perf-tzlist-cache`.
+- Debian stable (amd64 via emulation): `twc` 3.7 ms ±1.3, `gotwc` 3.2 ms ±0.3 on
+  main; `twc` 2.5 ms ±0.0, `gotwc` 2.8 ms ±0.1 on `perf-tzlist-cache`.
+- macOS arm64: `twc` 138.9 ms ±3.0, `gotwc` 15.7 ms ±0.3 on main; `twc` 138.2 ms
+  ±1.6, `gotwc` 15.0 ms ±0.2 on `perf-tzlist-cache`.
 
-Why macOS is slower: `twc` sets `TZ` and calls `localtime` per entry, so
-Apple libc re-parses zoneinfo each time. `gotwc` loads each zone once and
-formats from cached data. On glibc/FreeBSD with `tzalloc` you can cache
-handles to close the gap; macOS lacks `tzalloc`, so a faster path would
-need a cached zoneinfo parser (e.g., CoreFoundation `CFTimeZone`) instead
-of the per-call `TZ` swap.
+Why macOS is slower: `twc` sets `TZ` and calls `localtime` per entry, so Apple
+libc re-parses zoneinfo each time. `gotwc` loads each zone once and formats from
+cached data. On glibc/FreeBSD with `tzalloc` you can cache handles to close the
+gap; macOS lacks `tzalloc`, so a faster path would need a cached zoneinfo parser
+(e.g., CoreFoundation `CFTimeZone`) instead of the per-call `TZ` swap.
 
 ## Getting Started
 
@@ -60,6 +59,7 @@ If you are building [`twc`], you'll need:
 ### Installing
 
 If you have [Homebrew] installed, just run:
+
 ```shell
 brew install Neved4/homebrew-tap/twc
 ```
@@ -79,6 +79,7 @@ make twc
 ```
 
 Alternatively, if you have [`zig`] installed:
+
 ```shell
 zig cc twc.c -o twc
 ```
@@ -128,6 +129,7 @@ See also:
 ### Docker
 
 To compile the binary inside a [Docker] image, run:
+
 ```shell
 docker build .
 ```
@@ -143,8 +145,8 @@ Also builds on any [C99] compiler on systems that supports and have
 
 ## Standards
 
-`twc` is compatible with [POSIX.1-2024][][^2] as well as [C23][][^3], and
-it outputs [ISO 8601][][^4] format.
+`twc` is compatible with [POSIX.1-2024][POSIX.1-2024][^2] as well as
+[C23][C23][^3], and it outputs [ISO 8601][ISO 8601][^4] format.
 
 ## See Also
 
@@ -187,18 +189,22 @@ See the [LICENSE](LICENSE) file for details.
 [ISO 8601]: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[`version 2024b`]: https://www.iana.org/time-zones
+[`version 2025c`]: https://www.iana.org/time-zones
 [Docker]: https://www.docker.com/
 [Homebrew]: https://brew.sh/
 [zdump(8)]: https://man.freebsd.org/cgi/man.cgi?query=zdump&apropos=0&sektion=0&manpath=FreeBSD+7.0-RELEASE&format=html
 
-[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
-    entries. Measured with [`hyperfine`].
-[^2]: _IEEE Std 1003.1-2024: Standard for Information Technology
-    — Portable Operating System Interface (POSIX®)_, \
+[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600 entries.
+    Measured with [`hyperfine`].
+
+[^2]: _IEEE Std 1003.1-2024: Standard for Information Technology — Portable
+    Operating System Interface (POSIX®)_,\
     ISO/IEC DIS 9945. URL: https://pubs.opengroup.org/onlinepubs/9799919799/
-[^3]: _ISO/IEC 9899: Standard for Information Technology
-    — Programming languages — C_, ISO/IEC 9899:2023. \
+
+[^3]: _ISO/IEC 9899: Standard for Information Technology — Programming languages
+    — C_, ISO/IEC 9899:2023.\
     URL: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf
-[^4]: _ISO 8601: Date and time — Representations for information interchange_, ISO 8601-1:2019. \
+
+[^4]: _ISO 8601: Date and time — Representations for information interchange_,
+    ISO 8601-1:2019.\
     URL: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
